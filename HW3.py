@@ -72,7 +72,6 @@ print("Weighted F1 (dev):", round(f1, 4))
  
 # Step 1.2
 from sklearn.svm import SVC
-from sklearn.metrics import accuracy_score, f1_score
 
 # Train a Support Vector Machine (default settings)
 svm_model = SVC(random_state=42)
@@ -88,8 +87,6 @@ print("SVM Weighted F1 (dev):", round(f1_svm, 4))
 
 # Step 2.1
 print("\nStep2\n")
-from sklearn.svm import SVC
-from sklearn.metrics import accuracy_score, f1_score
 from sklearn.model_selection import GridSearchCV
 
 # Define parameter grid (small, simple)
@@ -116,9 +113,6 @@ print("Tuned SVM Accuracy (dev):", round(acc_best, 4))
 print("Tuned SVM Weighted F1 (dev):", round(f1_best, 4))
 
 # Step 2.2
-from sklearn.linear_model import LogisticRegression
-from sklearn.model_selection import GridSearchCV
-from sklearn.metrics import accuracy_score, f1_score
 
 # Small parameter grid for regularization strength (C)
 param_grid = {
@@ -148,7 +142,6 @@ print("Tuned Logistic Regression Weighted F1 (dev):", round(f1_best_lr, 4))
 print("\nStep 3\n")
 import numpy as np
 from collections import Counter
-from sklearn.metrics import accuracy_score, f1_score
 
 class KNN:
     def __init__(self, k=5):
