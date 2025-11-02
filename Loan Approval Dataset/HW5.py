@@ -6,7 +6,6 @@ from sklearn.metrics import f1_score
 from sklearn.preprocessing import StandardScaler
 
 # Step 0: Load and inspect
-
 print("\nDataset:\n")
 
 df = pd.read_csv("Loan Eligibility Prediction.csv")
@@ -16,14 +15,14 @@ print("Columns:", df.columns)
 # Convert target to numeric (Y=1, N=0)
 df["Loan_Status"] = df["Loan_Status"].map({"Y": 1, "N": 0})
 
-# Step 1: Prep + split
 
+# Step 1: Prep + split
 print("\nStep 1\n")
 
 # Drop ID (not useful for prediction)
 df = df.drop(columns=["Customer_ID"])
 
-# One-hot encode categorical columns
+# Encoding categorical columns
 df = pd.get_dummies(
     df,
     columns=["Gender", "Married", "Education", "Self_Employed", "Property_Area"],
@@ -131,12 +130,13 @@ def grid_search(X_train, y_train, C_list, gamma_list, n_folds=5, random_state=42
     print(f"  C = {best['C']}, gamma = {best['gamma']} → mean F1 = {best['mean_f1']:.4f} (±{best['std_f1']:.4f})")
     return results, best
 
-# Define a grid (you can widen or narrow as needed)
+# Define a grid 
 C_list     = [0.01, 0.1, 1, 10, 100]
 gamma_list = ["scale", 1, 0.3, 0.1, 0.03, 0.01, 0.003, 0.001]
 
 # Run Step 3
 grid_results, best_model = grid_search(X_train, y_train, C_list, gamma_list, n_folds=5, random_state=42)
+
 
 # Step 4: Final train on full training set + test evaluation
 print("\nStep 4\n")
